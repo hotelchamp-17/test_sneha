@@ -37,7 +37,7 @@ FROM rates_stg AS rates_long
 LEFT JOIN cd_titan_base_clean_stg as cd_titan_base_clean
 ON cd_titan_base_clean.titan_session_id = rates_long.session_id	 
 LEFT JOIN cd_monthly_rates_stg AS cd_monthly_rates 
-ON cd_monthly_rates.website_hash = cd_titan_base_clean.website_hash	 
+ON cd_monthly_rates.website_hash = rates_long.website_hash	 
 group by 
 cd_titan_base_clean.website_hash,
 cd_titan_base_clean.utc_time,
@@ -66,4 +66,3 @@ rates_long.adjusted_delta_direct,
 rates_long.adjusted_delta_direct_pct,
 cd_monthly_rates.avg_total_net_value_eur;
 grant select on rpt_rate_lab_ota_impact to looker,dashboard,sneha,avantika;
-
